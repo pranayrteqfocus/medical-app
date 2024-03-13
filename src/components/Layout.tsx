@@ -1,5 +1,5 @@
 // components/Layout.js
-import { Box, Container } from "@mui/material";
+import { Box } from "@mui/material";
 import Head from "next/head";
 import Sidebar from "./Siderbar"; // Import your Sidebar component
 
@@ -14,10 +14,8 @@ const Layout = ({ children }: any) => {
             </Head>
             <div>
                 <Sidebar />
-                <Box sx={{ ml: 15 }} >
-                    <Container>
-                        <main>{children}</main>
-                    </Container>
+                <Box ml={12} mr={5}>
+                    <main>{children}</main>
                 </Box>
             </div>
         </>

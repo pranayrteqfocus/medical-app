@@ -1,59 +1,71 @@
 // components/Sidebar.tsx
-import SupportIcon from '@mui/icons-material/ContactSupport';
-import AppointmentsIcon from '@mui/icons-material/Event';
-import HomeIcon from '@mui/icons-material/Home';
-import HospitalIcon from '@mui/icons-material/LocalHospital';
-import LogoutIcon from '@mui/icons-material/Logout';
-import PatientsIcon from '@mui/icons-material/People';
-import { CssBaseline, Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { CalendarMonth, Logout, MedicalServices, Person3, SupportAgent } from '@mui/icons-material';
+import { Avatar, Box, CssBaseline, Drawer, List, ListItem } from '@mui/material';
+import Image from 'next/image';
 import React from 'react';
+import CompanyLogo from '../../public/Logo.png';
+import CustomListItem from './CustomListItem';
+import HomeIcon from './Icons/Home';
+const SideMenuItem = [
+    {
+        key: 'home',
+        title: 'Home',
+        icon: <HomeIcon color={'#00B94A'} />
+    },
+    {
+        key: 'hospital',
+        title: 'Hospital',
+        icon: <MedicalServices sx={{ color: "#B0B0B0", fontSize: 40 }} />
+    },
+    {
+        key: 'patients',
+        title: 'Patients',
+        icon: <Person3 sx={{ color: "#B0B0B0", fontSize: 40 }} />
+    },
+    {
+        key: 'appointments',
+        title: 'Appointments',
+        icon: <CalendarMonth sx={{ color: "#B0B0B0", fontSize: 40 }} />
+    },
+    {
+        key: 'support',
+        title: 'Support',
+        icon: <SupportAgent sx={{ color: "#B0B0B0", fontSize: 40 }} />
+    }
+]
 
 const Sidebar: React.FC = () => {
     return (
         <>
             <CssBaseline />
-            <Drawer variant="permanent" anchor="left">
-                <List>
-                    <ListItem button key="logo">
+            <Drawer variant="permanent" anchor="left" >
+                <List style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center", height: '90vh' }}>
+                    <ListItem key="logo">
                         {/* Add your logo here */}
-                        <ListItemText primary="Logo" />
+                        <Image
+                            alt='Logo'
+                            src={CompanyLogo}
+                            width={45}
+                        />
                     </ListItem>
-                    <ListItem button key="home">
-                        <ListItemIcon>
-                            <HomeIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Home" />
-                    </ListItem>
-                    <ListItem button key="hospital">
-                        <ListItemIcon>
-                            <HospitalIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Hospital" />
-                    </ListItem>
-                    <ListItem button key="patients">
-                        <ListItemIcon>
-                            <PatientsIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Patients" />
-                    </ListItem>
-                    <ListItem button key="appointments">
-                        <ListItemIcon>
-                            <AppointmentsIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Appointments" />
-                    </ListItem>
-                    <ListItem button key="support">
-                        <ListItemIcon>
-                            <SupportIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Support" />
-                    </ListItem>
-                    <ListItem button key="logout">
-                        <ListItemIcon>
-                            <LogoutIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Logout" />
-                    </ListItem>
+
+                    {SideMenuItem.map((item, index) => (
+                        <CustomListItem
+                            key={item.key}
+                            title={item.title}>
+                            {item.icon}
+                            {index === 0 && <Box sx={{ backgroundColor: '#035F22', width: 30, height: 3, borderRadius: 10 }} width={30} ></Box>}
+                        </CustomListItem>
+                    ))}
+
+                    <CustomListItem
+                        key='logout'
+                        title='Logout'
+                    >
+                        <Avatar >
+                            <Logout />
+                        </Avatar>
+                    </CustomListItem>
                 </List>
             </Drawer>
         </>
